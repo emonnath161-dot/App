@@ -2,26 +2,59 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexGen Store</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEXGEN STORE</title>
+    <style>
+        /* ১. ডিজাইন ফিক্স (CSS) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0b0c10; color: #fff; overflow-x: hidden; }
+
+        header { background: #1f2833; padding: 20px 15px; border-bottom: 3px solid #66fcf1; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .main-title { font-size: 32px; font-weight: 900; color: #66fcf1; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+
+        /* টেক্সট স্লাইডার */
+        .text-slider { background: rgba(102, 252, 241, 0.1); height: 40px; overflow: hidden; margin-bottom: 15px; border-radius: 8px; border: 1px solid #45a29e; }
+        .text-slides { display: flex; flex-direction: column; animation: slideText 9s infinite; }
+        .text-slides p { height: 40px; line-height: 40px; color: #66fcf1; font-size: 14px; font-weight: bold; }
+        @keyframes slideText { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-40px); } 66%, 96% { transform: translateY(-80px); } 100% { transform: translateY(0); } }
+
+        #searchInput { width: 100%; padding: 12px 20px; border-radius: 25px; border: 1px solid #66fcf1; background: #000; color: #66fcf1; outline: none; font-size: 14px; }
+
+        /* ২ কলাম গ্রিড (আপনার চাহিদা অনুযায়ী) */
+        #apps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; }
+        .app-card { background: #1f2833; border: 1px solid #45a29e; border-radius: 15px; padding: 12px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
+        .badge { position: absolute; top: 8px; right: 8px; background: #66fcf1; color: #000; font-size: 9px; font-weight: bold; padding: 2px 6px; border-radius: 5px; }
+
+        /* আইকন সাইজ ফিক্স */
+        .app-icon { width: 65px; height: 65px; border-radius: 14px; object-fit: cover; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .app-title { font-size: 14px; font-weight: bold; color: #66fcf1; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .app-desc { font-size: 10px; color: #c5c6c7; height: 28px; overflow: hidden; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+        .download-btn { display: block; width: 100%; padding: 8px 0; background: transparent; border: 1px solid #66fcf1; color: #66fcf1; border-radius: 20px; text-decoration: none; font-size: 11px; font-weight: bold; transition: 0.3s; }
+        .download-btn:hover { background: #66fcf1; color: #000; }
+
+        /* অ্যানিমেটেড মেনু */
+        .fab-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; align-items: flex-end; }
+        .fab-options { display: none; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .fab-options.open { display: flex; }
+        .fab-item { background: #1f2833; color: #66fcf1; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-size: 13px; font-weight: bold; border: 1px solid #66fcf1; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fab-btn { width: 55px; height: 55px; background: #66fcf1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(102, 252, 241, 0.4); transition: 0.3s; }
+        .fab-btn.active { transform: rotate(45deg); background: #ff4d4d; }
+    </style>
 </head>
 <body>
 
 <header>
     <h1 class="main-title">NEXGEN STORE</h1>
-    
     <div class="text-slider">
         <div class="text-slides">
-            <p>আমাদের স্টোরে আপনাকে স্বাগতম!</p>
-            <p>সব প্রিমিয়াম অ্যাপ এখন একদম ফ্রি।</p>
-            <p>নতুন অ্যাপ পেতে আমাদের টেলিগ্রামে যুক্ত হন।</p>
+            <p>আমাদের স্টোরে স্বাগতম!</p>
+            <p>প্রিমিয়াম অ্যাপ এখন একদম ফ্রি।</p>
+            <p>টেলিগ্রামে আপডেট পেতে জয়েন করুন।</p>
         </div>
     </div>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="অ্যাপের নাম লিখে সার্চ করুন...">
-    </div>
+    <input type="text" id="searchInput" placeholder="অ্যাপের নাম লিখে সার্চ করুন...">
 </header>
 
 <div id="apps"></div>
@@ -33,9 +66,57 @@
         <a href="contact.html" class="fab-item">যোগাযোগ 📞</a>
         <a href="telegram.html" class="fab-item">টেলিগ্রাম ✈️</a>
     </div>
-    <div class="fab-btn" onclick="toggleFabMenu()">👨‍🦱</div>
+    <div class="fab-btn" id="fabBtn" onclick="toggleMenu()">👨‍🦱</div>
 </div>
 
-<script src="script.js"></script>
+<script>
+    // ২. ডাটা এবং ফাংশন (JavaScript)
+    const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUeFjb_jJoyCgoLll-7QbRlnOKGXVX9Y-FiHrW23UW1E2XVBYifT6Z5-NCQJMzhWfL-dWw2Lbk_b4I/pub?output=csv';
+    let allApps = [];
+
+    async function loadData() {
+        try {
+            const response = await fetch(SHEET_URL);
+            const data = await response.text();
+            const rows = data.split('\n').slice(1);
+            allApps = rows.map(row => {
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                return {
+                    name: cols[0]?.replace(/"/g, '').trim() || '',
+                    desc: cols[1]?.replace(/"/g, '').trim() || 'Premium App',
+                    icon: cols[2]?.replace(/"/g, '').trim() || '',
+                    link: cols[3]?.replace(/"/g, '').trim() || '#',
+                    badge: cols[4]?.replace(/"/g, '').trim() || 'NEW'
+                };
+            }).filter(app => app.name !== "");
+            renderApps(allApps);
+        } catch (e) { console.error(e); }
+    }
+
+    function renderApps(apps) {
+        const grid = document.getElementById('apps');
+        grid.innerHTML = apps.map(app => `
+            <div class="app-card">
+                <span class="badge">${app.badge}</span>
+                <img src="${app.icon}" class="app-icon" onerror="this.src='https://cdn-icons-png.flaticon.com/512/252/252232.png'">
+                <div class="app-title">${app.name}</div>
+                <div class="app-desc">${app.desc}</div>
+                <a href="${app.link}" class="download-btn" target="_blank">DOWNLOAD</a>
+            </div>
+        `).join('');
+    }
+
+    function toggleMenu() {
+        document.getElementById('fabOptions').classList.toggle('open');
+        document.getElementById('fabBtn').classList.toggle('active');
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase();
+        renderApps(allApps.filter(a => a.name.toLowerCase().includes(val)));
+    });
+
+    loadData();
+</script>
 </body>
 </html>
