@@ -1,27 +1,41 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <header>
-    <div class="header-content">
-        <h1 class="main-title">NEXGEN STORE</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="আপনার পছন্দের অ্যাপ খুঁজুন...">
+    <h1 class="main-title">NEXGEN STORE</h1>
+    
+    <div class="text-slider">
+        <div class="text-slides">
+            <p>আমাদের স্টোরে আপনাকে স্বাগতম!</p>
+            <p>সব প্রিমিয়াম অ্যাপ এখন একদম ফ্রি।</p>
+            <p>নতুন অ্যাপ পেতে আমাদের টেলিগ্রামে যুক্ত হন।</p>
         </div>
     </div>
-</header>
 
-<div class="slider">
-    <div class="slides">
-        <div class="slide"><img src="https://via.placeholder.com/800x300/1f2833/66fcf1?text=Download+Premium+Apps" alt="Slider 1"></div>
-        <div class="slide"><img src="https://via.placeholder.com/800x300/1f2833/66fcf1?text=New+Apps+Every+Day" alt="Slider 2"></div>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="অ্যাপের নাম লিখে সার্চ করুন...">
     </div>
-</div>
+</header>
 
 <div id="apps"></div>
 
 <div class="fab-container">
     <div class="fab-options" id="fabOptions">
-        <a href="developer.html" class="fab-item"><span class="fab-text">Developer</span> 👨‍💻</a>
-        <a href="guide.html" class="fab-item"><span class="fab-text">কিভাবে ডাউনলোড করবেন</span> 📽️</a>
-        <a href="contact.html" class="fab-item"><span class="fab-text">যোগাযোগ</span> 📞</a>
-        <a href="telegram.html" class="fab-item"><span class="fab-text">টেলিগ্রাম</span> ✈️</a>
+        <a href="developer.html" class="fab-item">Developer 👨‍💻</a>
+        <a href="guide.html" class="fab-item">কিভাবে ডাউনলোড করবেন 📽️</a>
+        <a href="contact.html" class="fab-item">যোগাযোগ 📞</a>
+        <a href="telegram.html" class="fab-item">টেলিগ্রাম ✈️</a>
     </div>
     <div class="fab-btn" onclick="toggleFabMenu()">👨‍🦱</div>
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
