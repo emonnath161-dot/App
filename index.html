@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NexGen App Store</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
 <header>
     <div class="header-content">
-        <h1>NexGen Store</h1>
+        <h1 class="main-title">NEXGEN STORE</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="অ্যাপ খুঁজুন...">
+            <input type="text" id="searchInput" placeholder="আপনার পছন্দের অ্যাপ খুঁজুন...">
         </div>
     </div>
 </header>
 
+<div class="slider">
+    <div class="slides">
+        <div class="slide"><img src="https://via.placeholder.com/800x300/1f2833/66fcf1?text=Download+Premium+Apps" alt="Slider 1"></div>
+        <div class="slide"><img src="https://via.placeholder.com/800x300/1f2833/66fcf1?text=New+Apps+Every+Day" alt="Slider 2"></div>
+    </div>
+</div>
+
 <div id="apps"></div>
 
-<div class="menu-btn" onclick="toggleMenu()">👨‍🦱</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+<div class="fab-container">
+    <div class="fab-options" id="fabOptions">
+        <a href="developer.html" class="fab-item"><span class="fab-text">Developer</span> 👨‍💻</a>
+        <a href="guide.html" class="fab-item"><span class="fab-text">কিভাবে ডাউনলোড করবেন</span> 📽️</a>
+        <a href="contact.html" class="fab-item"><span class="fab-text">যোগাযোগ</span> 📞</a>
+        <a href="telegram.html" class="fab-item"><span class="fab-text">টেলিগ্রাম</span> ✈️</a>
+    </div>
+    <div class="fab-btn" onclick="toggleFabMenu()">👨‍🦱</div>
+</div>
