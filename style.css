@@ -1,154 +1,46 @@
-/* ১. বেসিক সেটআপ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #0b0c10; color: #fff; overflow-x: hidden; font-family: sans-serif; }
 
-body {
-    background-color: #0b0c10; /* গাঢ় কালো ব্যাকগ্রাউন্ড */
-    color: #c5c6c7;
-    overflow-x: hidden; /* স্ক্রিন ডানে-বামে নড়বে না */
-}
+header { background: #1f2833; padding: 15px; border-bottom: 2px solid #66fcf1; position: sticky; top: 0; z-index: 100; }
+h1 { font-size: 20px; color: #66fcf1; text-align: center; margin-bottom: 10px; }
+#searchInput { width: 100%; padding: 10px; border-radius: 20px; border: 1px solid #66fcf1; background: #000; color: #66fcf1; outline: none; }
 
-/* ২. হেডার এবং সার্চ বার */
-header {
-    background: #1f2833;
-    padding: 15px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 2px solid #66fcf1;
-}
-
-.search-container {
-    margin-top: 10px;
-    padding: 0 10px;
-}
-
-#searchInput {
-    width: 100%;
-    padding: 10px;
-    border-radius: 25px;
-    border: 1px solid #66fcf1;
-    background: #0b0c10;
-    color: #66fcf1;
-    outline: none;
-}
-
-/* ৩. অ্যাপ গ্রিড লেআউট (পাশাপাশি ২টি অ্যাপ) */
+/* পাশাপাশি ২টি অ্যাপ রাখার মেইন কোড */
 #apps {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* মোবাইলে ২টি কলাম */
-    gap: 12px;
-    padding: 15px;
-    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr); /* ২ কলাম */
+    gap: 10px;
+    padding: 10px;
 }
 
-/* ৪. অ্যাপ কার্ড ডিজাইন */
 .app-card {
     background: #1f2833;
     border: 1px solid #45a29e;
-    border-radius: 15px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: 0.3s;
+    justify-content: space-between;
 }
 
-.app-card:hover {
-    border-color: #66fcf1;
-    transform: translateY(-5px);
-}
-
-/* ৫. ব্যাজ (NEW/HOT) */
 .badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #66fcf1;
-    color: #000;
-    font-size: 9px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 5px;
-    text-transform: uppercase;
+    position: absolute; top: 5px; right: 5px; background: #66fcf1; color: #000;
+    font-size: 8px; font-weight: bold; padding: 2px 5px; border-radius: 4px;
 }
 
-/* ৬. অ্যাপ আইকন সাইজ ফিক্স */
+/* আইকন সাইজ ছোট করা */
 .app-icon {
-    width: 65px; 
-    height: 65px;
-    border-radius: 12px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    width: 60px; height: 60px; border-radius: 12px; margin: 0 auto 10px; object-fit: cover;
 }
 
-/* ৭. অ্যাপ টেক্সট (নাম ও বর্ণনা) */
-.app-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: #66fcf1;
-    text-align: center;
-    margin-bottom: 5px;
-    /* লম্বা নাম হলে ডট ডট দেখাবে */
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+.app-title { font-size: 13px; font-weight: bold; color: #66fcf1; margin-bottom: 5px; }
+.app-desc { font-size: 10px; color: #c5c6c7; height: 25px; overflow: hidden; margin-bottom: 10px; }
 
-.app-desc {
-    font-size: 11px;
-    color: #c5c6c7;
-    text-align: center;
-    margin-bottom: 12px;
-    height: 32px; /* ৩ লাইনের বেশি হবে না */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-/* ৮. ডাউনলোড বাটন */
 .download-btn {
-    width: 100%;
-    background: transparent;
-    border: 1px solid #66fcf1;
-    color: #66fcf1;
-    padding: 7px 0;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    transition: 0.3s;
+    display: block; width: 100%; padding: 6px 0; border: 1px solid #66fcf1;
+    color: #66fcf1; text-decoration: none; border-radius: 15px; font-size: 11px; font-weight: bold;
 }
 
-.download-btn:hover {
-    background: #66fcf1;
-    color: #0b0c10;
-}
-
-/* ৯. সাইড মেনু বা নেভিগেশন (👨‍🦱 আইকনের জন্য) */
-.menu-btn {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background: #66fcf1;
-    font-size: 24px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(102, 252, 241, 0.3);
-    z-index: 1001;
-}
+.menu-btn { position: fixed; bottom: 20px; right: 20px; background: #66fcf1; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; }
