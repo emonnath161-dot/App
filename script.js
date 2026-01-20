@@ -36,3 +36,10 @@ async function fetchSheetData() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchSheetData);
+
+function toggleFabMenu() {
+    const options = document.getElementById('fabOptions');
+    const btn = document.querySelector('.fab-btn');
+    options.classList.toggle('open');
+    btn.classList.toggle('active');
+}
