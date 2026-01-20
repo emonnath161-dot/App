@@ -1,56 +1,76 @@
-// আপনার গুগল শিটের আইডি
-const sheetId = '1nIO19n20c6h8_B9S1OL5d2GhCKjRlneaIKxP1XPg3vw';
-const base = `https://docs.google.com/spreadsheets/d/1nIO19n20c6h8_B9S1OL5d2GhCKjRlneaIKxP1XPg3vw/tq?tqx=out:json`;
+/**
+ * NexGen App Store - Google Sheets Integrated System
+ */
 
-const appGrid = document.getElementById('apps');
-const searchInput = document.getElementById('searchInput');
+const SHEET_ID = '1nIO19n20c6h8_B9S1OL5d2GhCKjRlneaIKxP1XPg3vw'; 
+// JSON ফরম্যাটে ডাটা আনার জন্য লিঙ্ক পরিবর্তন করা হয়েছে (এটি বেশি নির্ভরযোগ্য)
+const sheetURL = `https://docs.google.com/spreadsheets/d/${1nIO19n20c6h8_B9S1OL5d2GhCKjRlneaIKxP1XPg3vw}/gviz/tq?tqx=out:json`;
+
 let allApps = [];
+let filteredApps = [];
 
-// শিট থেকে ডাটা আনা
-async function fetchApps() {
+// ডাটা লোড করার ফাংশন
+async function fetchSheetData() {
     try {
-        const response = await fetch(base);
+        const response = await fetch(sheetURL);
         const text = await response.text();
-        const data = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = data.table.rows;
-
+        
+        // গুগল শিটের JSON ডাটা ক্লিন করা
+        const jsonData = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+        const rows = jsonData.table.rows;
+        
         allApps = rows.map(row => ({
             name: row.c[0] ? row.c[0].v : '',
-            icon: row.c[2] ? row.c[2].v : '',
-            link: row.c[3] ? row.c[3].v : '',
-            desc: row.c[1] ? row.c[1].v : 'প্রিমিয়াম অ্যাপ'
-        }));
+            desc: row.c[1] ? row.c[1].v : 'প্রিমিয়াম অ্যাপ',
+            icon: row.c[2] ? row.c[2].v : 'https://cdn-icons-png.flaticon.com/512/252/252232.png',
+            link: row.c[3] ? row.c[3].v : '#',
+            badge: row.c[4] ? row.c[4].v : 'NEW'
+        })).filter(app => app.name && app.name.length > 0);
 
-        displayApps(allApps);
+        filteredApps = [...allApps];
+        displayApps(filteredApps);
     } catch (error) {
-        console.error('ডাটা লোড করতে সমস্যা হয়েছে:', error);
+        console.error("Error fetching data:", error);
+        document.getElementById('apps').innerHTML = "<p style='color:red; text-align:center;'>ডাটা লোড করতে ব্যর্থ! শিট পারমিশন চেক করুন।</p>";
     }
 }
 
-// অ্যাপগুলো স্ক্রিনে দেখানো
+// অ্যাপগুলো গ্রিডে দেখানো
 function displayApps(apps) {
-    appGrid.innerHTML = '';
+    const appGrid = document.getElementById('apps'); // HTML আইডির সাথে মিল রাখা হয়েছে
+    if(!appGrid) return;
+    appGrid.innerHTML = "";
+
+    if (apps.length === 0) {
+        appGrid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: #66fcf1;'>কোনো অ্যাপ পাওয়া যায়নি!</p>";
+        return;
+    }
+
     apps.forEach(app => {
         const card = document.createElement('div');
         card.className = 'app-card';
         card.innerHTML = `
-            <img src="${app.icon}" alt="${app.name}" class="app-icon">
-            <h3 class="app-title">${app.name}</h3>
-            <p class="app-desc">${app.desc}</p>
-            <a href="${app.link}" class="download-btn" target="_blank">ডাউনলোড</a>
+            <img src="${app.icon}" alt="${app.name}" class="app-icon" onerror="this.src='https://cdn-icons-png.flaticon.com/512/252/252232.png'">
+            <div class="app-title">${app.name}</div>
+            <div class="app-desc">${app.desc}</div>
+            <a href="${app.link}" class="download-btn" target="_blank">DOWNLOAD</a>
         `;
         appGrid.appendChild(card);
     });
 }
 
 // সার্চ ফাংশন
-searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allApps.filter(app => 
-        app.name.toLowerCase().includes(term)
-    );
-    displayApps(filtered);
-});
+const searchInput = document.getElementById('searchInput');
+if(searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filteredApps = allApps.filter(app => 
+            app.name.toLowerCase().includes(query) || 
+            app.desc.toLowerCase().includes(query)
+        );
+        displayApps(filteredApps);
+    });
+}
 
-// লোড হওয়া শুরু
-fetchApps();
+// ওয়েবসাইট লোড হলে ডাটা আনা শুরু হবে
+document.addEventListener('DOMContentLoaded', fetchSheetData);
